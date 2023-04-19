@@ -1,5 +1,10 @@
 import { regexp,phone,idExp } from "./controler";
 
+export type LinkData = {
+    phone:string,
+    id:string
+}
+
 //проверает сообщение на просьбу ссылки
 export const isNLink = (str: string | undefined): boolean => {
     if (!isUndefined(str))
@@ -28,7 +33,9 @@ export const getPhone = (str:string|undefined):string => {
     if(number===null)
         return "error";
     else
+    {
         return number[0];
+    }
 }
 //возращает ИД КЛ из строки
 export const getID = (str:string):string => {
@@ -47,8 +54,15 @@ export const replaceSubStr = (str:string,sub:string,replacement=''):string =>{
     str = str.replace(sub,replacement);
     return str;
 }
-//Получение "просьбы" из строки(нужно что бы в Controler удалить эту подстроку)
-export const RegExpToStr = (regexp:RegExp, str:string):string =>{
-    let result = str.match(regexp);
-    return result![0];
+
+export const checkPhone = (number:string):string => {
+    console.log('check number')
+    if(number.length==10)
+    {
+        console.log('if in check number');
+        number = "38" + number;
+        console.log(number);
+    }
+    return number;
 }
+
